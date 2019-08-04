@@ -1,19 +1,8 @@
-//package com.itdr.testdemo;
-//
-//import javax.servlet.ServletException;
-//import javax.servlet.annotation.WebServlet;
-//import javax.servlet.http.HttpServlet;
-//import javax.servlet.http.HttpServletRequest;
-//import javax.servlet.http.HttpServletResponse;
-//import java.io.IOException;
-//
-//@WebServlet(name = "Servlet1",value = "/manage/user/*")
-//public class Servlet1 extends HttpServlet {
-//    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//doGet(request,response);
-//    }
-//
-//    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        System.out.println(request.getPathInfo());
-//    }
-//}
+package com.itdr.testdemo;
+
+
+
+
+public class Servlet1 {
+
+}

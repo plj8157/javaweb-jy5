@@ -83,9 +83,9 @@ String pathInfo=  request.getPathInfo();
         String password = request.getParameter("password");
 
      ResponseCode rs=  uc.selectOne(username,password);
-     //获取session对象
-        HttpSession session=request.getSession();
-        session.setAttribute("user",rs.getData());
+//     //获取session对象
+//        HttpSession session=request.getSession();
+//        session.setAttribute("user",rs.getData());
         return rs;
     }
     //禁用
@@ -93,18 +93,18 @@ String pathInfo=  request.getPathInfo();
         String uid =request.getParameter("uid");//获取参数
 
         ResponseCode rs=  uc.selectOne(uid);
-//        //获取session对象
-        HttpSession session=request.getSession();
-        session.setAttribute("user",rs.getData());
+////        //获取session对象
+//        HttpSession session=request.getSession();
+//        session.setAttribute("user",rs.getData());
         return rs;
     }
    //根据用户id查找一个全部信息
    private ResponseCode SelectUsers(HttpServletRequest request){
        String uid =request.getParameter("uid");//获取参数
        ResponseCode rs=  uc.UserSelect(uid);
-//       //获取session对象
-       HttpSession session=request.getSession();
-       session.setAttribute("user",rs.getData());
+////       //获取session对象
+//       HttpSession session=request.getSession();
+//       session.setAttribute("user",rs.getData());
        return rs;
    }
 //根据用户id修改信息

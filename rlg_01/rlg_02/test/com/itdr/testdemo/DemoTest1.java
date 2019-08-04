@@ -21,7 +21,7 @@ public class DemoTest1 {
         }
     }
     @Test
-    public void Test2() throws SQLException {
+    public void Test2()  {
 
 
     }
