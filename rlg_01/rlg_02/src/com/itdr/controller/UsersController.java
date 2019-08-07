@@ -26,23 +26,23 @@ doGet(request,response);
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         //请求路径
-String pathInfo=  request.getPathInfo();
+        String pathInfo=  request.getPathInfo();
         String path = PathUitl.getPath(pathInfo);
         //统一返回对象
         ResponseCode rs=null;
 //判断是什么请求
         switch (path){
             case "list":
-                rs=listDo(request);
+                listDo(request,response);
                 break;
             case "login":
-                rs=loginDo(request);
+               loginDo(request,response);
                 break;
-            case "disableuserDo":
-                rs=disableuserDo(request);
+            case "disableuser":
+                disableuserDo(request);
                 break;
             case "SelectUsers":
-                rs=SelectUsers(request);
+                SelectUsers(request);
         }
 
 
@@ -51,42 +51,46 @@ String pathInfo=  request.getPathInfo();
 //        UserService uc=new UserService();//业务层对象
 //      rs= uc.selectAll(pageSize,pageNum);//业务层的查询所有
 //返回响应数据
-         response.getWriter().write(rs.toString());
+//         response.getWriter().write(rs.toString());
 
     }
+
     //获取所有信息
-    private ResponseCode listDo(HttpServletRequest request){
-        ResponseCode rs=new ResponseCode();
-        HttpSession session=request.getSession();
-        Users users=(Users )session.getAttribute("user");
-        if(users==null){
-            rs.setStatus(3);
-            rs.setMag("请登录后操作");
-            return rs;
-        }
-        if(users.getType()!=1){
-            rs.setStatus(2);
-            rs.setMag("没有权限");
-            return rs;
-        }
+    private void listDo(HttpServletRequest request,HttpServletResponse response){
+//        ResponseCode rs=new ResponseCode();
+
         //获取参数
         String pageSize=request.getParameter("pageSize");
         String pageNum = request.getParameter("pageNum");
 
-         rs = uc.selectAll(pageSize, pageNum);
-        return rs;
+        ResponseCode rs = uc.selectAll(pageSize, pageNum);
+request.setAttribute("uli",rs);
+        try {
+            request.getRequestDispatcher("/userlist.do.jsp").forward(request,response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//        return rs;
     }
     //用户登录
-    private ResponseCode loginDo(HttpServletRequest request){
+    private void  loginDo(HttpServletRequest request,HttpServletResponse response)  {
         //获取参数
         String username=request.getParameter("username");
         String password = request.getParameter("password");
 
      ResponseCode rs=  uc.selectOne(username,password);
 //     //获取session对象
-//        HttpSession session=request.getSession();
-//        session.setAttribute("user",rs.getData());
-        return rs;
+        HttpSession session=request.getSession();
+        session.setAttribute("user",rs.getData());
+        try {
+            request.getRequestDispatcher("/WEB-INF/home.jsp").forward(request,response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     //禁用
     private ResponseCode disableuserDo(HttpServletRequest request){

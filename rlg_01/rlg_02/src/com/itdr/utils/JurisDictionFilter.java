@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(filterName = "JurisDictionFilter",value="/manage/user/*")
+@WebFilter(filterName = "JurisDictionFilter",value="/manage/*")
 public class JurisDictionFilter implements Filter {
     public void destroy() {
     }
@@ -48,7 +48,7 @@ public class JurisDictionFilter implements Filter {
         }
         //全部没问题，放行
         chain.doFilter(req,resp);
-return;
+        return;
 
     }
 

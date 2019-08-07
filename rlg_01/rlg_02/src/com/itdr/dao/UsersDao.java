@@ -52,10 +52,10 @@ public class UsersDao {
 //根据id禁用
     public int uodateByUid(Integer uid) {
         QueryRunner qr=new QueryRunner(PoolUitl.getCom());
-        String sql="update  Users set stats=1 where id=?";
+        String sql="update users set stats=1 where id=?";
         int row=0;
         try {
-            row=  qr.update(sql,new BeanHandler<Users>(Users.class ),uid);
+            row=qr.update(sql,uid);
         } catch (SQLException e) {
             e.printStackTrace();
         }

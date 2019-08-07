@@ -4,6 +4,9 @@ import com.itdr.common.Const;
 import com.itdr.common.ResponseCode;
 import com.itdr.dao.CommodityDao;
 import com.itdr.pojo.Commodity;
+import com.itdr.pojo.Users;
+
+import java.util.List;
 
 public class CommodityService {
     private CommodityDao cd=new CommodityDao();
@@ -33,6 +36,21 @@ public class CommodityService {
         }
         rs.setStatus(0);
         rs.setData(c);
+        return rs;
+    }
+
+    public ResponseCode selectAll(String pageSize, String pageNum) {
+        if (pageSize==null||pageSize.equals("")){
+            pageSize="10";
+        }
+        if (pageNum==null||pageNum.equals("")){
+            pageNum="1";
+        }
+
+        List<Commodity> li= cd.selectAll(pageSize,pageNum);
+        ResponseCode rs=new ResponseCode();
+        rs.setStatus(0);
+        rs.setData(li);
         return rs;
     }
 }

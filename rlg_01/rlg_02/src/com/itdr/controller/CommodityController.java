@@ -31,18 +31,31 @@ doGet(request,response);
             case  "detail":
          rs=detailDo(request);
          break;
+            case "list":
+                rs=listDo(request);
         }
         //返回响应数据
         response.getWriter().write(rs.toString());
     }
-//获取商品详情
+//获取商品列表
+    private ResponseCode listDo(HttpServletRequest request) {
+        //获取参数
+        String pageSize=request.getParameter("pageSize");
+        String pageNum = request.getParameter("pageNum");
+
+        ResponseCode rs = cs.selectAll(pageSize, pageNum);
+        return rs;
+
+    }
+
+    //获取商品详情
     private ResponseCode detailDo(HttpServletRequest request){
 
         //获取参数
         String productId=request.getParameter("productId");
 
         ResponseCode  rs=cs.selectOne(productId);
-//        //     //获取session对象
+        //获取session对象
 //        HttpSession session=request.getSession();
 //        session.setAttribute("product",rs.getData());
         return rs;
